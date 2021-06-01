@@ -1,0 +1,5 @@
+.terraform
+.vscode
+terraform.tfvars
+.terraform.lock.hcl
+*.pem
