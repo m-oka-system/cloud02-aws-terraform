@@ -61,53 +61,53 @@ resource "aws_db_option_group" "mysql" {
   }
 }
 
-# resource "aws_db_instance" "mysql" {
-#   engine                                = "mysql"
-#   engine_version                        = "8.0.20"
-#   license_model                         = "general-public-license"
-#   identifier                            = "${var.prefix}-db-instance"
-#   username                              = "root"
-#   password                              = "password"
-#   instance_class                        = "db.t3.medium"
-#   storage_type                          = "gp2"
-#   allocated_storage                     = 20
-#   max_allocated_storage                 = 100
-#   multi_az                              = true
-#   db_subnet_group_name                  = aws_db_subnet_group.subnet.name
-#   publicly_accessible                   = false
-#   vpc_security_group_ids                = [aws_security_group.rds_sg.id]
-#   port                                  = 3306
-#   iam_database_authentication_enabled   = false
-#   name                                  = "cloud"
-#   parameter_group_name                  = aws_db_parameter_group.mysql.name
-#   option_group_name                     = aws_db_option_group.mysql.name
-#   backup_retention_period               = 7
-#   backup_window                         = "19:00-20:00"
-#   copy_tags_to_snapshot                 = true
-#   storage_encrypted                     = true
-#   performance_insights_enabled          = true
-#   performance_insights_retention_period = 7
-#   monitoring_interval                   = 60
-#   monitoring_role_arn                   = "arn:aws:iam::${data.aws_caller_identity.self.account_id}:role/rds-monitoring-role"
-#   enabled_cloudwatch_logs_exports       = ["error", "general", "slowquery"]
-#   auto_minor_version_upgrade            = false
-#   maintenance_window                    = "Sat:20:00-Sat:21:00"
-#   deletion_protection                   = false
-#   skip_final_snapshot                   = true
-#   apply_immediately                     = false
+resource "aws_db_instance" "mysql" {
+  engine                                = "mysql"
+  engine_version                        = "8.0.20"
+  license_model                         = "general-public-license"
+  identifier                            = "${var.prefix}-db-instance"
+  username                              = "root"
+  password                              = "password"
+  instance_class                        = "db.t3.medium"
+  storage_type                          = "gp2"
+  allocated_storage                     = 20
+  max_allocated_storage                 = 100
+  multi_az                              = true
+  db_subnet_group_name                  = aws_db_subnet_group.subnet.name
+  publicly_accessible                   = false
+  vpc_security_group_ids                = [aws_security_group.rds_sg.id]
+  port                                  = 3306
+  iam_database_authentication_enabled   = false
+  name                                  = "cloud"
+  parameter_group_name                  = aws_db_parameter_group.mysql.name
+  option_group_name                     = aws_db_option_group.mysql.name
+  backup_retention_period               = 7
+  backup_window                         = "19:00-20:00"
+  copy_tags_to_snapshot                 = true
+  storage_encrypted                     = true
+  performance_insights_enabled          = true
+  performance_insights_retention_period = 7
+  monitoring_interval                   = 60
+  monitoring_role_arn                   = "arn:aws:iam::${data.aws_caller_identity.self.account_id}:role/rds-monitoring-role"
+  enabled_cloudwatch_logs_exports       = ["error", "general", "slowquery"]
+  auto_minor_version_upgrade            = false
+  maintenance_window                    = "Sat:20:00-Sat:21:00"
+  deletion_protection                   = false
+  skip_final_snapshot                   = true
+  apply_immediately                     = false
 
-#   tags = {
-#     Name = "${var.prefix}-db-instance"
-#   }
+  tags = {
+    Name = "${var.prefix}-db-instance"
+  }
 
-#   lifecycle {
-#     ignore_changes = [password]
-#   }
-# }
+  lifecycle {
+    ignore_changes = [password]
+  }
+}
 
 data "aws_caller_identity" "self" {}
 
-# output "rds_endpoint" {
-#   description = "The connection endpoint in address:port format."
-#   value       = aws_db_instance.mysql.endpoint
-# }
+output "rds_endpoint" {
+  description = "The connection endpoint in address:port format."
+  value       = aws_db_instance.mysql.endpoint
+}
