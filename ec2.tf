@@ -106,11 +106,11 @@ resource "aws_instance" "web_02" {
 
 
 output "web01_public_ip" {
-  description = "valThe public IP address assigned to the instanceue"
+  description = "The public IP address assigned to the instanceue"
   value       = aws_instance.web_01.public_ip
 }
 
 output "web02_public_ip" {
-  description = "valThe public IP address assigned to the instanceue"
+  description = "The public IP address assigned to the instanceue"
   value       = aws_instance.web_02.public_ip
 }
