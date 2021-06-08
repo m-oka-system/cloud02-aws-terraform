@@ -31,7 +31,6 @@ data "aws_ssm_parameter" "amzn2_latest_ami" {
 resource "aws_instance" "web_01" {
   ami                     = data.aws_ssm_parameter.amzn2_latest_ami.value
   instance_type           = "t2.micro"
-  count                   = 1
   iam_instance_profile    = aws_iam_instance_profile.ec2.name
   disable_api_termination = false
   monitoring              = false
@@ -70,7 +69,6 @@ resource "aws_instance" "web_01" {
 resource "aws_instance" "web_02" {
   ami                     = data.aws_ssm_parameter.amzn2_latest_ami.value
   instance_type           = "t2.micro"
-  count                   = 1
   iam_instance_profile    = aws_iam_instance_profile.ec2.name
   disable_api_termination = false
   monitoring              = false
@@ -109,10 +107,10 @@ resource "aws_instance" "web_02" {
 
 output "web01_public_ip" {
   description = "valThe public IP address assigned to the instanceue"
-  value       = aws_instance.web_01[0].public_ip
+  value       = aws_instance.web_01.public_ip
 }
 
 output "web02_public_ip" {
   description = "valThe public IP address assigned to the instanceue"
-  value       = aws_instance.web_02[0].public_ip
+  value       = aws_instance.web_02.public_ip
 }
