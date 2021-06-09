@@ -1,6 +1,7 @@
 ################################
 # RDS
 ################################
+# Subnet group
 resource "aws_db_subnet_group" "subnet" {
   name = "${var.prefix}-db-subnet"
 
@@ -10,6 +11,7 @@ resource "aws_db_subnet_group" "subnet" {
   ]
 }
 
+# Parameter group
 resource "aws_db_parameter_group" "mysql" {
   name   = "${var.prefix}-parameter-group"
   family = "mysql8.0"
@@ -39,6 +41,7 @@ resource "aws_db_parameter_group" "mysql" {
   }
 }
 
+# Option group
 resource "aws_db_option_group" "mysql" {
   name                 = "${var.prefix}-option-group"
   engine_name          = "mysql"
@@ -61,6 +64,7 @@ resource "aws_db_option_group" "mysql" {
   }
 }
 
+# DB Instance
 resource "aws_db_instance" "mysql" {
   engine                                = "mysql"
   engine_version                        = "8.0.20"
