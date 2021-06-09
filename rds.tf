@@ -88,7 +88,7 @@ resource "aws_db_instance" "mysql" {
   performance_insights_enabled          = true
   performance_insights_retention_period = 7
   monitoring_interval                   = 60
-  monitoring_role_arn                   = "arn:aws:iam::${data.aws_caller_identity.self.account_id}:role/rds-monitoring-role"
+  monitoring_role_arn                   = aws_iam_role.rds_monitoring_role.arn
   enabled_cloudwatch_logs_exports       = ["error", "general", "slowquery"]
   auto_minor_version_upgrade            = false
   maintenance_window                    = "Sat:20:00-Sat:21:00"
@@ -104,8 +104,6 @@ resource "aws_db_instance" "mysql" {
     ignore_changes = [password]
   }
 }
-
-data "aws_caller_identity" "self" {}
 
 output "rds_endpoint" {
   description = "The connection endpoint in address:port format."
