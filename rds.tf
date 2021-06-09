@@ -70,7 +70,7 @@ resource "aws_db_instance" "mysql" {
   engine_version                        = "8.0.20"
   license_model                         = "general-public-license"
   identifier                            = "${var.prefix}-db-instance"
-  username                              = "root"
+  username                              = "admin"
   password                              = "password"
   instance_class                        = "db.t3.medium"
   storage_type                          = "gp2"
